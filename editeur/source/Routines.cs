@@ -1,5 +1,11 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
+
+public enum EPrioriteRoutine
+{
+    ChaqueFrame
+}
 
 public static class SRoutines
 {
@@ -75,6 +81,40 @@ public static class SRoutines
             m_routines.Add(m_add[i]);
         }
         m_add = new List<URoutineBase>();
+        return;
+    }
+}
+
+public abstract class URoutineBase
+{
+    public float Chrono { get; set; } = 0f;
+
+    protected float m_dureeYield;
+
+    public abstract void Tick(float dt);
+}
+
+public class URoutineSimple : URoutineBase
+{
+    private float m_accumulation = 0f;
+    private readonly Action m_action;
+
+    public URoutineSimple(EPrioriteRoutine priorite, Action action)
+    {
+        m_dureeYield = SRoutines.ObtenirDureeYield(priorite);
+        m_action = action;
+        return;
+    }
+
+    public override void Tick(float dt)
+    {
+        Chrono += dt;
+        m_accumulation += dt;
+        if (m_accumulation > m_dureeYield)
+        {
+            m_accumulation -= m_dureeYield;
+            m_action();
+        }
         return;
     }
 }

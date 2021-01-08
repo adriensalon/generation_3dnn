@@ -3,6 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+
+
+
+
+
 [Serializable]
 public class ParametresCalculGeometrie // interface pour creer un motif a
 {
@@ -18,6 +23,222 @@ public class ParametresCalculGeometrie // interface pour creer un motif a
     public float xB = 0.5f;
     public float xC = 0.75f;
 }
+
+[Serializable]
+public class Mouvement3d
+{
+    public GameObject cible;
+
+    private Vector2 memoireSouris;
+    private bool etaitClicDroitDerniereFrame = false;
+
+    public void EchelleMoletteSouris()
+    {
+        float e = 0.01f * Input.mouseScrollDelta.y;
+        cible.transform.localScale += (Vector3)new Vector3(e, e, e);
+    }
+    public void RotationClicDroit()
+    {
+        if (Input.GetKey(KeyCode.Mouse1))
+        {
+            if (!etaitClicDroitDerniereFrame)
+            {
+                etaitClicDroitDerniereFrame = true;
+                memoireSouris = new Vector2(Input.mousePosition.x, Input.mousePosition.y);
+                return;
+            }
+            etaitClicDroitDerniereFrame = true;
+            Vector2 pSouris = new Vector2(Input.mousePosition.x, Input.mousePosition.y);
+            Vector2 difference = 0.1f * (memoireSouris - pSouris);
+            cible.transform.rotation = Quaternion.Euler(
+                                                cible.transform.rotation.eulerAngles.x - difference.y,
+                                                cible.transform.rotation.eulerAngles.y + difference.x,
+                                                cible.transform.rotation.eulerAngles.z);
+            memoireSouris = pSouris;
+        }
+    }
+}
+
+[Serializable]
+public class AppareilPhoto
+{
+    public Camera cameraMoinsX;
+    public Camera cameraPlusX;
+    public Camera cameraMoinsY;
+    public Camera cameraPlusY;
+    public Camera cameraMoinsZ;
+    public Camera cameraPlusZ;
+
+    public Texture2D texturePhoto;
+    //public float tailleCameras = 1f;
+
+    public void PrendreLes6PhotosPack(string url)
+    {
+        texturePhoto = new Texture2D(Screen.width, 6 * Screen.height);
+
+        PrendreUnePhoto(cameraMoinsX, 0, texturePhoto);
+        PrendreUnePhoto(cameraPlusX, 1, texturePhoto);
+        PrendreUnePhoto(cameraMoinsY, 2, texturePhoto);
+        PrendreUnePhoto(cameraPlusY, 3, texturePhoto);
+        PrendreUnePhoto(cameraMoinsZ, 4, texturePhoto);
+        PrendreUnePhoto(cameraPlusX, 5, texturePhoto);
+
+        FichierJpg.Exporter(texturePhoto, url);
+
+        return;
+    }
+
+    private void PrendreUnePhoto(Camera c, int i, Texture2D pack)
+    {
+        c.gameObject.SetActive(true);
+        c.targetTexture = new RenderTexture(Screen.width, Screen.height, 24);
+        c.Render();
+        RenderTexture rTex = c.activeTexture;
+        c.targetTexture = null;
+        RenderTexture.active = rTex;
+        pack.ReadPixels(new Rect(0, 0, rTex.width, rTex.height), 0, i * Screen.height);
+        pack.Apply();
+        c.gameObject.SetActive(false);
+        return;
+    }
+}
+
+[Serializable]
+public class Projecteur
+{
+    public Shader shader6planar;
+    public string nomTextureMoinsX;
+    public string nomTexturePlusX;
+    public string nomTextureMoinsY;
+    public string nomTexturePlusY;
+    public string nomTextureMoinsZ;
+    public string nomTexturePlusZ;
+
+    public Material ProjeterPack(string url)
+    {
+        Material mat = new Material(shader6planar);
+        Texture2D tex = FichierJpg.Importer(url);
+        // decouper en 6
+        //mat.SetTexture(nomTextureMoinsX, )
+        return mat;
+    }
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+[Serializable]
+public class VueMenu
+{
+    public GameObject menu;
+    public GameObject start;
+    public InputField urlChargerProjet;
+    public InputField urlCreerProjet;
+
+    public void ActiverStart()
+    {
+        menu.SetActive(false);
+        start.SetActive(true);
+    }
+    public void DesactiverStart()
+    {
+        menu.SetActive(true);
+        start.SetActive(false);
+    }
+}
+[Serializable]
+public class VueImporter
+{
+    public GameObject gui;
+    public GameObject guiFichiers;
+    public GameObject guiSauvegarder;
+    public GameObject guiGenerer;
+    public GameObject guiBoutonArreterPrevisualisation;
+    public GameObject cube;
+
+    public GameObject xDebut;
+    public GameObject xExtension;
+    public GameObject xFin;
+
+
+    public MeshFilter modeleMesh;
+    public MeshRenderer modeleRendu;
+
+    public InputField urlMesh;
+    public InputField urlTextureLabel;
+    public InputField urlTextureTarget;
+
+    public Dropdown categorie;
+    public InputField nomNouvelleCategorie;
+    public Toggle estNouvelleCategorie;
+
+    public Slider geometrieDebutX;
+    public Slider geometrieExtensionX;
+    public Slider geometrieFinX;
+
+    public Slider previsualisationTailleX;
+    public InputField nomFichier;
+}
+[Serializable]
+public class VueApprendre
+{
+    public GameObject gui;
+    public GameObject rendu;
+    public GameObject fenetreResultats;
+    public GameObject fenetreGenerer;
+
+    public Dropdown categories;
+    public Dropdown ias;
+
+    public Dropdown geometriePrevisualiser;
+
+    public Toggle estNouvelleIa;
+    public InputField nomNouvelleIa;
+
+    public Toggle utiliserGpu;
+    public Toggle continuer;
+
+
+    public Text nombreEpochs;
+    public Text boutonCommencerInterrompre;
+
+}
+[Serializable]
+public class VueScripter
+{
+    public GameObject gui;
+    public GameObject rendu;
+
+    public Mouvement3d mouvement3d;
+    public FenetreEditeurRegionFichier fenetreFichier;
+    public FenetreEditeurRegionScript fenetreScript;
+
+    public void Activer()
+    {
+        gui.SetActive(true);
+        rendu.SetActive(true);
+        fenetreScript.LancerAnalyseurSyntaxe();
+        return;
+    }
+    public void Desactiver()
+    {
+        gui.SetActive(false);
+        rendu.SetActive(false);
+        fenetreScript.ArreterAnalyseurSyntaxe();
+        return;
+    }
+}
+
 
 
 
