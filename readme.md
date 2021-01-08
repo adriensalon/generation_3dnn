@@ -15,7 +15,7 @@ l'objectif était de créer des univers de jv en temps réel.
 	-  	importer depuis .obj, .jpg, et visualiser les découpes
 	- entraîner les réseaux de neurones et visualiser les résultats
 	- générer des scènes depuis un éditeur de scripts lua
-- des extern sont définis pour utiliser l'api dans unity par exemple.
+- des extern sont définis pour utiliser l'api depuis d'autres langages (le compileur Roslyn d'unity par exemple ne tolère pas C++/CLI). des géométries complexes peuvent mener à des délais (marshal) de l'ordre de plusieurs secondes.
 
 fonctions :
 
