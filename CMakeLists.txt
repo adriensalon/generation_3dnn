@@ -10,6 +10,7 @@ set(MATLAB "C:/Program Files/MATLAB/MATLAB Runtime/v98/extern")
 
 # repertoires
 include_directories("include")
+include_directories("source")
 include_directories(${BUILD})
 include_directories(${MATLAB}/include)
 link_directories(${BUILD})
@@ -18,9 +19,9 @@ link_directories(${MATLAB}/lib/win64/microsoft) # MSVC SPECIFIC
 # compile la partie independante
 set(SOURCE
     "source/__debug.cpp"
-    "source/__matlab.cpp"
     "source/__structures.cpp"
-    "source/__unity.cpp"
+    "source/texture_procedurale.cpp"
+    "source/libgproc.cpp"
     "source/organisation__charger_projet.cpp"
     "source/organisation__creer_projet.cpp"
     "source/preparation__calculer_geometrie.cpp"
