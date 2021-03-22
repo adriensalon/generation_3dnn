@@ -1,4 +1,4 @@
-#include "GPROC.h"
+#include <generation_procedurale.hpp>
 
 void preparation::interrompre_entrainement_texture()
 {

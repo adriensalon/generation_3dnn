@@ -1,4 +1,4 @@
-#include "GPROC.h"
+#include <generation_procedurale.hpp>
 
 void creer_categorie(
     const std::string& nom_categorie)

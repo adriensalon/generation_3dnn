@@ -1,4 +1,4 @@
-#include "GPROC.h"
+#include <generation_procedurale.hpp>
 
 
 
@@ -73,7 +73,7 @@ extern "C"
 			url_dossier);
 
 		construction_matlab();
-		construction_contexte_lua();
+		// construction_contexte_lua();
 		return;
 	}
 
@@ -89,7 +89,7 @@ extern "C"
 			url_dossier);
 
 		construction_matlab();
-		construction_contexte_lua();
+		// construction_contexte_lua();
 		return;
 	}
 
@@ -335,17 +335,17 @@ extern "C"
 		return;
 	}
 
-	geometrie_procedurale_api
-	void unity_executer_script(
-		char* nom_script,
-		callback_photographie cb_photo,
-		callback_geometrie cb_geo)
-	{
-		generation::executer_script(
-			nom_script,
-			cb_photo,
-			cb_geo);
+	// geometrie_procedurale_api
+	// void unity_executer_script(
+	// 	char* nom_script,
+	// 	callback_photographie cb_photo,
+	// 	callback_geometrie cb_geo)
+	// {
+	// 	generation::executer_script(
+	// 		nom_script,
+	// 		cb_photo,
+	// 		cb_geo);
 
-		return;
-	}
+	// 	return;
+	// }
 }

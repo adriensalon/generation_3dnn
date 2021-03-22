@@ -1,4 +1,4 @@
-#include "GPROC.h"
+#include <generation_procedurale.hpp>
 
 #include <selene.h>
 

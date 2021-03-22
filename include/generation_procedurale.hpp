@@ -11,7 +11,6 @@
 #include <fstream>
 #include <iostream>
 
-
 typedef void (*callback_log)(
 	size_t taille_message,
 	void* message);
@@ -327,10 +326,10 @@ namespace generation
 		const std::string& url_tex_target,
 		const bool utiliser_gpu);
 
-	void executer_script(
-		std::string nom_script,
-		callback_photographie cb_photo,
-		callback_geometrie cb_geo);
+	// void executer_script(
+	// 	std::string nom_script,
+	// 	callback_photographie cb_photo,
+	// 	callback_geometrie cb_geo);
 }
 
 

@@ -1,4 +1,4 @@
-#include "GPROC.h"
+#include <generation_procedurale.hpp>
 
 sauvegarde_geometrie preparation::charger_geometrie(
 	const std::string categorie,

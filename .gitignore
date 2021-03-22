@@ -1,1 +1,7 @@
 *.meta
+21 01 07 generation procedurale.pdf
+old/
+out/
+.vs/
+.vscode/
+build/

@@ -1,7 +1,5 @@
-#include "GPROC.h"
-
-
-#include <textures_ia.h>
+#include <generation_procedurale.hpp>
+#include "texture_procedurale.h"
 
 void generation::generer_texture(
 	const std::string& nom_categorie,

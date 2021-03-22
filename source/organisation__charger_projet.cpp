@@ -1,4 +1,4 @@
-#include "GPROC.h"
+#include <generation_procedurale.hpp>
 
 void organisation::charger_projet(
 	const std::string& url_dossier)

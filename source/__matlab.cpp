@@ -1,6 +1,6 @@
-#include "GPROC.h"
+#include <generation_procedurale.hpp>
 
-#include <textures_ia.h>
+#include "texture_procedurale.h"
 
 void construction_matlab()
 {
@@ -8,7 +8,7 @@ void construction_matlab()
 		log("could not initialize the application");
 		return;
 	}
-	if (!textures_iaInitialize()) {
+	if (!texture_proceduraleInitialize()) {
 		log("erreur : [Matlab] could not initialize the library");
 		return;
 	}
@@ -16,7 +16,7 @@ void construction_matlab()
 
 void destruction_matlab()
 {
-	textures_iaTerminate();
+	texture_proceduraleTerminate();
 	mclTerminateApplication();
 	return;
 }

@@ -1,7 +1,5 @@
-#include "GPROC.h"
-
-#include <textures_ia.h>
-
+#include <generation_procedurale.hpp>
+#include "texture_procedurale.h"
 
 void callback_entrainement(int nlhs, mxArray* plhs[], int nrhs, mxArray* prhs[])
 {

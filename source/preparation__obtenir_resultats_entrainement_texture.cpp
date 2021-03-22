@@ -1,4 +1,4 @@
-#include "GPROC.h"
+#include <generation_procedurale.hpp>
 
 resultats_entrainement_texture preparation::obtenir_resultats_entrainement_texture()
 {
