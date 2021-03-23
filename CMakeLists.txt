@@ -46,18 +46,18 @@ set_target_properties(generation_procedurale
 
 # compile + link la partie texture_procedurale
 set(SOURCE_MATLAB
-    "source/matlab/entrainer_ia.m"
-    "source/matlab/predire_ia.m")
+    ${CMAKE_SOURCE_DIR}/source/matlab/entrainer_ia.m
+    ${CMAKE_SOURCE_DIR}/source/matlab/predire_ia.m)
 add_custom_command(
     TARGET generation_procedurale PRE_BUILD
     COMMAND mcc 
                 -W lib:texture_procedurale 
                 -T link:lib 
-                -d ${BUILD}
+                -d ${CMAKE_SOURCE_DIR}/${BUILD}
                 -g
-                # -v
+                -v
                 ${SOURCE_MATLAB}
-    WORKING_DIRECTORY ${CMAKE_SOURCE_DIR})
+    DEPENDS ${SOURCE_MATLAB})
 target_link_libraries(generation_procedurale "texture_procedurale")
 target_link_libraries(generation_procedurale "mclmcrrt")
 
@@ -86,3 +86,68 @@ add_custom_command(
                 ${BUILD}/generation_procedurale.ilk
                 ${BUILD}/generation_procedurale.lib
     WORKING_DIRECTORY ${CMAKE_SOURCE_DIR})
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# copier plugins unity et ouvrir le projet
+
+add_custom_command(
+    TARGET generation_procedurale
+    DEPENDS generation_procedurale
+    COMMAND cp
+                ${BUILD}/texture_procedurale.dll
+                "c:/users/adri/projets unity/carte/assets/plugins"
+    WORKING_DIRECTORY ${CMAKE_SOURCE_DIR})
+add_custom_command(
+    TARGET generation_procedurale
+    DEPENDS generation_procedurale
+    COMMAND cp
+                ${BUILD}/texture_procedurale.pdb
+                "c:/users/adri/projets unity/carte/assets/plugins"
+    WORKING_DIRECTORY ${CMAKE_SOURCE_DIR})
+add_custom_command(
+    TARGET generation_procedurale
+    DEPENDS generation_procedurale
+    COMMAND cp
+                ${BUILD}/generation_procedurale.dll
+                "c:/users/adri/projets unity/carte/assets/plugins"
+    WORKING_DIRECTORY ${CMAKE_SOURCE_DIR})
+add_custom_command(
+    TARGET generation_procedurale
+    DEPENDS generation_procedurale
+    COMMAND cp
+                ${BUILD}/generation_procedurale.pdb
+                "c:/users/adri/projets unity/carte/assets/plugins"
+    WORKING_DIRECTORY ${CMAKE_SOURCE_DIR})
+
+
+
+
+# add_custom_command(
+#     TARGET generation_procedurale
+#     DEPENDS generation_procedurale
+#     COMMAND "C:/Program Files/Unity Editors/2019.4.0f1/Editor/Unity.exe" 
+#                 -projectPath "c:/users/adri/projets unity/carte"
+#     WORKING_DIRECTORY ${CMAKE_SOURCE_DIR})
+
+
+add_custom_command(
+    TARGET generation_procedurale PRE_BUILD
+    COMMAND taskkill /IM "C:/Program Files/Unity Editors/2019.4.0f1/Editor/Unity.exe" 
+    WORKING_DIRECTORY ${CMAKE_SOURCE_DIR})
+
+

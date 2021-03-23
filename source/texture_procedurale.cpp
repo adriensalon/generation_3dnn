@@ -4,6 +4,7 @@
 
 void construction_matlab()
 {
+	log("init matlab");
 	if (!mclInitializeApplication(NULL, 0)) {
 		log("could not initialize the application");
 		return;
