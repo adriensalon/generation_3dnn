@@ -1,6 +1,6 @@
 
 
-# génération procédurale
+# génération d'objets 3d avec UNet et PatchGAN
 ### principe :
 l'ambition était de pouvoir générer des objets procéduralement, en fonction d'un "type" et de dimensions souhaités. pour cela il faut fournir pour chaque "type" d'objet une collection de modèles 3d : 
 - les géométries sont découpées pour pouvoir être reconstituées à la taille désirée
