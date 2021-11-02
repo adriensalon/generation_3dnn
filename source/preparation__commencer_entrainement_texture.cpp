@@ -5,11 +5,11 @@ void callback_entrainement(int nlhs, mxArray* plhs[], int nrhs, mxArray* prhs[])
 {
 	log("cb");
 	projet_actuel.ecriture_resultats_entrainement_en_cours.store(true);
-	projet_actuel.resultats.epoch = (float)mxGetScalar(prhs[0]);
-	projet_actuel.resultats.gLoss = (float)mxGetScalar(prhs[1]);
-	projet_actuel.resultats.dLoss = (float)mxGetScalar(prhs[2]);
-	projet_actuel.resultats.lossL1 = (float)mxGetScalar(prhs[3]);
-	projet_actuel.resultats.ganLoss = (float)mxGetScalar(prhs[4]);
+	// projet_actuel.resultats.epoch = (float)mxGetScalar(prhs[0]);
+	// projet_actuel.resultats.gLoss = (float)mxGetScalar(prhs[1]);
+	// projet_actuel.resultats.dLoss = (float)mxGetScalar(prhs[2]);
+	// projet_actuel.resultats.lossL1 = (float)mxGetScalar(prhs[3]);
+	// projet_actuel.resultats.ganLoss = (float)mxGetScalar(prhs[4]);
 	projet_actuel.ecriture_resultats_entrainement_en_cours.store(false);
 
 	nlhs = 1;
